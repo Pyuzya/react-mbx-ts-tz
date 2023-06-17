@@ -1,14 +1,18 @@
 import { FunctionComponent, useState } from "react";
 
-interface TaskFormProps {}
+interface TaskFormProps {
+    saveTask: any;
+}
 
-const TaskForm: FunctionComponent<TaskFormProps> = () => {
+const TaskForm: FunctionComponent<TaskFormProps> = (props) => {
+    const { saveTask } = props;
     const [value, setValue] = useState("");
     return (
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                console.log(value);
+                saveTask(value);
+                setValue("");
             }}
         >
             <input

@@ -1,2 +1,21 @@
 .App
     text-align: center
+ul
+    list-style: none
+    width: 500px
+    background: lightgray
+
+.TaskList
+    &_item
+        display: flex
+        justify-content: space-around
+
+    &_title
+
+    &_close,&_add
+        cursor: pointer
+        border: 1px solid black
+        width: 20px
+        transition: 0.4s
+        ::hover
+            background: white
