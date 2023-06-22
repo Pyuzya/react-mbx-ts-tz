@@ -1,28 +1,21 @@
 import { useState } from "react";
-import TaskForm from "./components/TaskForm";
+// import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 import "./App.sass";
 
 function App() {
-    const [tasks, setTasks] = useState<any>([]);
+    const [state, setState] = useState<any>([]);
     return (
-        <div className="App">
-            <TaskForm
-                saveTask={(taskText: any) => {
-                    setTasks([...tasks, taskText]);
-                }}
-            />
-            <TaskList
-                tasks={tasks}
-                deleteTask={(taskIndex: any) => {
-                    const newTasks = tasks.filter(
-                        (_: any, i: any) => i !== taskIndex
-                    );
-                    setTasks(newTasks);
-                }}
-            />
+        <div className='App'>
+            <TaskList />
         </div>
     );
 }
-
+/* if (promptValue === "" || promptValue == null) {
+    const promptValue = prompt("Задача", "");
+     alert("Пустое поле / Отмена");
+ } else {
+     state.push(promptValue);
+     setState([...state]);
+ } */
 export default App;

@@ -4,18 +4,23 @@ ul
     list-style: none
     width: 500px
     background: lightgray
+    margin: 0 auto
 
-.TaskList
+.Task
     &_item
         display: flex
         justify-content: space-around
-
+        margin-top: 20px
     &_title
 
-    &_close,&_add
+    &_subTask
+        background: black
+        color: white
+
+    &_close,&_add,&_show
         cursor: pointer
         border: 1px solid black
         width: 20px
         transition: 0.4s
-        ::hover
+        &:hover
             background: white

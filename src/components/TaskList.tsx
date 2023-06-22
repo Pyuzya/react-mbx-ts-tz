@@ -1,41 +1,61 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
+import Task from "./Task";
 
-interface TaskListProps {
-    tasks: Array<string>;
-    deleteTask?: any;
-    addTask?: any;
-}
+interface TaskListProps {}
 
-const TaskList: FunctionComponent<TaskListProps> = (props) => {
-    const { tasks, deleteTask, addTask } = props;
+const TaskList: FunctionComponent<TaskListProps> = () => {
+    const [tasks, setTasks] = useState<any>([]);
+    const [inputValue, setInputValue] = useState("");
+    const createTask = (title: string) => {
+        let newTask = {
+            title: title,
+            minimize: false,
+            checkbox: false,
+        };
+        setTasks([...tasks, newTask]);
+    };
+    const deleteTask = (id: number) => {
+        let newTasks = tasks.filter((task: any, index: any) => {
+            if (index !== id) {
+                return tasks;
+            } else {
+                return console.log(index);
+            }
+        });
+        setTasks(newTasks);
+    };
     return (
-        <div className="TaskList">
+        <div className='TaskList'>
+            <form
+                onSubmit={(event) => {
+                    event.preventDefault();
+                    createTask(inputValue);
+                    setInputValue("");
+                }}>
+                <input
+                    type='text'
+                    placeholder='Add Task'
+                    onChange={(event) => {
+                        setInputValue(event.target.value);
+                    }}
+                    value={inputValue}
+                />
+            </form>
             <ul>
-                {tasks.map((task, i) => (
-                    <li
-                        className="TaskList_item"
-                        key={i}
-                    >
-                        <input type="checkbox" />
-                        <div className="TaskList_title">{task}</div>
-                        <div
-                            className="TaskList_close"
-                            onClick={() => {
-                                deleteTask(i);
-                            }}
-                        >
-                            X
-                        </div>
-                        <div
-                            className="TaskList_add"
-                            onClick={() => {
-                                addTask(i);
-                            }}
-                        >
-                            +
-                        </div>
-                    </li>
-                ))}
+                {tasks.map((task: any, i: number) => {
+                    return (
+                        <Task
+                            id={i}
+                            key={i}
+                            title={task.title}
+                            createTask={createTask}
+                            deleteTask={deleteTask}
+                            className='subTask'
+                        />
+                    );
+                })}
+                {/* {setTasks([...tasks])}
+                {console.log(tasks)} */}
             </ul>
         </div>
     );
